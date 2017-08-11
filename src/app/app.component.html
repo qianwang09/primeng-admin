@@ -1,20 +1,113 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
+<div id="header">
+  <div id="logo">
+    <a href="#"></a>
+  </div>
+  <div id="vlogo">
+    <a href="#"> </a>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="http://angularjs.blogspot.ca/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<div class="container" style="text-align:center">
+  <div id="redBar">
+    <span class="redBarTitle">
+    TOW Code Mappings
+    </span>
+  </div>
+  <div class="content">
+    <p-confirmDialog header="Confirmation" icon="fa fa-exclamation-circle-o" width="425"></p-confirmDialog>
+    <p-dataTable [value]="mappings" resizableColumns="true" selectionMode="single" [(selection)]="selectedMapping" (onRowSelect)="onRowSelect($event)"
+      [responsive]="true" [stacked]="stacked" [loading]="loading" loadingIcon="fa-spinner" [lazy]="true" (onLazyLoad)="GetTOWCodeMappings($event)"
+      [paginator]="true" [rows]="rows" [totalRecords]="totalRecords" [(first)]="first" [rowsPerPageOptions]="[20,50,100]" #mappingdt
+      dataKey="TOWCodeMappingID" exportFilename="TOWCodeMappings">
+      <!--<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>-->
+      <p-header>
+        <div class="ui-helper-clearfix">
+          <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="mappingdt.exportCSV()" style="float:right"></button>
+        </div>
+      </p-header>
+      <p-column styleClass="col-button" [style]="{'width':'10%'}">
+        <ng-template pTemplate="header">
+          <button type="button" pButton (click)="add()" icon="fa-plus" pTooltip="Add" tooltipPosition="right" showDelay="300" hideDelay="300"></button>
+        </ng-template>
+        <ng-template let-mapping="rowData" pTemplate="body">
+          <button type="button" pButton (click)="delete(mapping)" icon="fa-trash" pTooltip="Delete" tooltipPosition="right" showDelay="300"
+            hideDelay="300"></button>
+          <button type="button" pButton (click)="edit(mapping)" icon="fa-edit" pTooltip="Edit" tooltipPosition="right" showDelay="300"
+            hideDelay="300"></button>
+        </ng-template>
+      </p-column>
+      <p-column field="TOWCodeMappingID" header="TOWCodeMappingID" hidden="true" [style]="{'display':'none'}"></p-column>
+      <p-column field="LoS" header="LoS" [filter]="true" filterMatchMode="contains" [style]="{'width':'10%'}">
+        <ng-template pTemplate="filter" let-col>
+          <input (keyup.enter)="mappingdt.filter($event.value,col.field,col.filterMatchMode)" [(ngModel)]="searchLoS" type="text" placeholder="Search LoS"
+            class="ui-column-filter ui-inputtext ui-widget ui-state-default ui-corner-all" />
+        </ng-template>
+      </p-column>
+      <p-column field="LoSDescription" header="LoS Description" [style]="{'width':'20%'}"></p-column>
+      <!-- <p-column field="ProductCode" header="ProductCode" [filter]="true" filterMatchMode="contains" [style]="{'width':'10%'}"></p-column> -->
+      <p-column field="ProductCode" header="Product Code" [filter]="true" filterMatchMode="contains" [style]="{'width':'15%'}">
+        <ng-template pTemplate="filter" let-col>
+          <input (keyup.enter)="mappingdt.filter($event.value,col.field,col.filterMatchMode)" [(ngModel)]="searchProductCode" type="text"
+            placeholder="Search Product Code" class="ui-column-filter ui-inputtext ui-widget ui-state-default ui-corner-all"
+          />
+        </ng-template>
+      </p-column>
+      <p-column field="ProductDescription" header="Product Description"></p-column>
+      <p-column field="SECChangeTypeCode" header="CES Status Change Type">
+        <ng-template let-col let-mappingRow="rowData" let-ri="rowIndex" pTemplate="body">
+          <span>{{ getCESStatusChangeTypeDes(mappingRow[col.field]) }} </span>
+        </ng-template>
+      </p-column>
+      <p-column field="SECChangeTypeValue" header="Highrisk Flag" [style]="{'width':'10%'}"></p-column>
+      <p-footer>
+      </p-footer>
+    </p-dataTable>
+    <p-dialog header="Mapping Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="600">
+      <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="mapping">
+        <div style="display:none;">
+          <div class="ui-grid-col-5"><label for="ID">TOWCodeMappingID</label></div>
+          <div class="ui-grid-col-7"><input pInputText id="TOWCodeMappingID" [(ngModel)]="mapping.TOWCodeMappingID" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label for="LoS">LoS</label></div>
+          <div class="ui-grid-col-7"><input pInputText id="LoS" [(ngModel)]="mapping.LoS" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label for="LoSDescription">LoS Description</label></div>
+          <div class="ui-grid-col-7"><input pInputText id="LoSDescription" [(ngModel)]="mapping.LoSDescription" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label for="ProductCode">Product Code</label></div>
+          <div class="ui-grid-col-7"><input pInputText id="ProductCode" [(ngModel)]="mapping.ProductCode" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label for="ProductDescription">Product Description</label></div>
+          <div class="ui-grid-col-7"><input pInputText id="ProductDescription" [(ngModel)]="mapping.ProductDescription" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label>CES Status Change Type</label></div>
+          <div class="ui-grid-col-7">
+            <p-dropdown [options]="SECChangeTypeCodeList"   [(ngModel)]="mapping.SECChangeTypeCode"  [style]="{'width':'100%'}"></p-dropdown>
+            <!-- <input pInputText id="SECChangeType" [(ngModel)]="mapping.SECChangeTypeCode" /> -->
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label for="SECChangeTypeValue">Highrisk Flag</label></div>
+          <div class="ui-grid-col-7"><input pInputText id="SECValue" [(ngModel)]="mapping.SECChangeTypeValue" /></div>
+        </div>
+      </div>
+      <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+          <button type="button" pButton icon="fa-close" (click)="cancelEdit()" label="Cancel"></button>
+          <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+        </div>
+      </p-footer>
+    </p-dialog>
+    <div id="editmessagecontainer">
+      <p-growl [(value)]="editMessage" [style]="{'top':'40%','left':'40%', 'width':'400px'}"></p-growl>
+    </div>
+  </div>
+</div>
+<div id="footer">
+  2016 PwC, All right reserved.
+</div>

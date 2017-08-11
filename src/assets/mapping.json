@@ -1,0 +1,86 @@
+{
+  "data": [
+    {
+      "ID": 1,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    },
+    {
+      "ID": 2,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    },
+    {
+      "ID": 3,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    },
+    {
+      "ID": 4,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    },
+    {
+      "ID": 5,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    },
+    {
+      "ID": 6,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    },
+    {
+      "ID": 7,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    },
+    {
+      "ID": 8,
+      "LoS": "ABAS",
+      "LoSDescription": "Actuarial",
+      "ProductCode": "A182",
+      "ProductDescription": "Regulation Driven - Risk capital and transformation",
+      "SECChangeTypeCode": "1",
+      "SECChangeTypeDescription": "C2 to C1 SEC",
+      "SECChangeTypeValue": "N"
+    }
+    
+
+  ]
+}

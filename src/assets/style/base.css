@@ -1,0 +1,48 @@
+html body {
+  height: 100%;
+  margin: 0px;
+}
+
+.bodycontainer {
+  min-height: 100%;
+  height: auto;
+  position: relative;
+  margin: 8px;
+}
+
+#logo {
+  display: block;
+  float: left;
+  width: 60px;
+  height: 50px;
+  background: url(../images/pwc_logo.png) top left no-repeat;
+}
+
+#logo a {
+  display: block;
+  width: 60px;
+  height: 50px;
+}
+
+#vlogo {
+  display: block;
+  float: right;
+  width: 85px;
+  height: 50px;
+  background: url(../images/vrisk_logo.png) center left no-repeat;
+}
+
+#vlogo a {
+  display: block;
+  width: 85px;
+  height: 50px;
+}
+
+#redBar {
+  text-align: left;
+  padding-left: 4px 30px;
+}
+
+#footer {
+  position: absolute;
+}
