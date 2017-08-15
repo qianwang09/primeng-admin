@@ -22,10 +22,10 @@
       <!--<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>-->
       <p-header>
         <div class="ui-helper-clearfix">
-          <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="mappingdt.exportCSV()" style="float:right"></button>
+          <button type="button" pButton icon="fa-file-o" iconPos="left" label="Export to CSV" (click)="mappingdt.exportCSV()" style="float:right"></button>
         </div>
       </p-header>
-      <p-column styleClass="col-button" [style]="{'width':'10%'}">
+      <p-column styleClass="col-button" [style]="{'width':'8%'}">
         <ng-template pTemplate="header">
           <button type="button" pButton (click)="add()" icon="fa-plus" pTooltip="Add" tooltipPosition="right" showDelay="300" hideDelay="300"></button>
         </ng-template>
@@ -37,36 +37,45 @@
         </ng-template>
       </p-column>
       <p-column field="TOWCodeMappingID" header="TOWCodeMappingID" hidden="true" [style]="{'display':'none'}"></p-column>
-      <p-column field="LoS" header="LoS" [filter]="true" filterMatchMode="contains" [style]="{'width':'10%'}">
+      <p-column field="ProductCode" header="Product Code" [filter]="true" filterMatchMode="contains" [style]="{'width':'9%'}">
+        <ng-template pTemplate="filter" let-col>
+          <input (keyup.enter)="mappingdt.filter($event.value,col.field,col.filterMatchMode)" [(ngModel)]="searchProductCode" type="text"
+            placeholder="Search Product" class="ui-column-filter ui-inputtext ui-widget ui-state-default ui-corner-all"
+          />
+        </ng-template>
+      </p-column>
+      <p-column field="ProductDescription" header="Product Description"></p-column>
+      <p-column field="LoS" header="LoS" [filter]="true" filterMatchMode="contains" [style]="{'width':'8%'}">
         <ng-template pTemplate="filter" let-col>
           <input (keyup.enter)="mappingdt.filter($event.value,col.field,col.filterMatchMode)" [(ngModel)]="searchLoS" type="text" placeholder="Search LoS"
             class="ui-column-filter ui-inputtext ui-widget ui-state-default ui-corner-all" />
         </ng-template>
       </p-column>
-      <p-column field="LoSDescription" header="LoS Description" [style]="{'width':'20%'}"></p-column>
-      <!-- <p-column field="ProductCode" header="ProductCode" [filter]="true" filterMatchMode="contains" [style]="{'width':'10%'}"></p-column> -->
-      <p-column field="ProductCode" header="Product Code" [filter]="true" filterMatchMode="contains" [style]="{'width':'15%'}">
-        <ng-template pTemplate="filter" let-col>
-          <input (keyup.enter)="mappingdt.filter($event.value,col.field,col.filterMatchMode)" [(ngModel)]="searchProductCode" type="text"
-            placeholder="Search Product Code" class="ui-column-filter ui-inputtext ui-widget ui-state-default ui-corner-all"
-          />
-        </ng-template>
-      </p-column>
-      <p-column field="ProductDescription" header="Product Description"></p-column>
-      <p-column field="SECChangeTypeCode" header="CES Status Change Type">
+      <p-column field="LoSDescription" header="LoS Description" [style]="{'width':'14%'}"></p-column>
+
+      <p-column field="SECChangeTypeCode" header="CES Status Change Type" [style]="{'width':'18%'}">
         <ng-template let-col let-mappingRow="rowData" let-ri="rowIndex" pTemplate="body">
           <span>{{ getCESStatusChangeTypeDes(mappingRow[col.field]) }} </span>
         </ng-template>
       </p-column>
-      <p-column field="SECChangeTypeValue" header="Highrisk Flag" [style]="{'width':'10%'}"></p-column>
+      <p-column field="SECChangeTypeValue" header="Highrisk Flag" [style]="{'width':'7%'}"></p-column>
       <p-footer>
       </p-footer>
     </p-dataTable>
-    <p-dialog header="Mapping Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="600">
+    <p-dialog header="Mapping Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [width]="650">
       <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="mapping">
         <div style="display:none;">
           <div class="ui-grid-col-5"><label for="ID">TOWCodeMappingID</label></div>
           <div class="ui-grid-col-7"><input pInputText id="TOWCodeMappingID" [(ngModel)]="mapping.TOWCodeMappingID" /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label for="ProductCode">Product Code</label></div>
+          <div class="ui-grid-col-7"><input (blur)="productCodeFinished()" (keyup.enter)="productCodeFinished()" pInputText id="ProductCode" [(ngModel)]="mapping.ProductCode"
+            /></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-5"><label for="ProductDescription">Product Description</label></div>
+          <div class="ui-grid-col-7"><input pInputText id="ProductDescription" [(ngModel)]="mapping.ProductDescription" /></div>
         </div>
         <div class="ui-grid-row">
           <div class="ui-grid-col-5"><label for="LoS">LoS</label></div>
@@ -77,17 +86,9 @@
           <div class="ui-grid-col-7"><input pInputText id="LoSDescription" [(ngModel)]="mapping.LoSDescription" /></div>
         </div>
         <div class="ui-grid-row">
-          <div class="ui-grid-col-5"><label for="ProductCode">Product Code</label></div>
-          <div class="ui-grid-col-7"><input pInputText id="ProductCode" [(ngModel)]="mapping.ProductCode" /></div>
-        </div>
-        <div class="ui-grid-row">
-          <div class="ui-grid-col-5"><label for="ProductDescription">Product Description</label></div>
-          <div class="ui-grid-col-7"><input pInputText id="ProductDescription" [(ngModel)]="mapping.ProductDescription" /></div>
-        </div>
-        <div class="ui-grid-row">
           <div class="ui-grid-col-5"><label>CES Status Change Type</label></div>
           <div class="ui-grid-col-7">
-            <p-dropdown [options]="SECChangeTypeCodeList"   [(ngModel)]="mapping.SECChangeTypeCode"  [style]="{'width':'100%'}"></p-dropdown>
+            <p-dropdown [options]="SECChangeTypeList" [(ngModel)]="mapping.SECChangeTypeCode" [style]="{'width':'100%'}" [required]="true"></p-dropdown>
             <!-- <input pInputText id="SECChangeType" [(ngModel)]="mapping.SECChangeTypeCode" /> -->
           </div>
         </div>
@@ -104,7 +105,7 @@
       </p-footer>
     </p-dialog>
     <div id="editmessagecontainer">
-      <p-growl [(value)]="editMessage" [style]="{'top':'40%','left':'40%', 'width':'400px'}"></p-growl>
+      <p-growl [(value)]="editMessage" [style]="{'top':'40%','left':'40%', 'width':'400px', 'z-index':2000}" [life]="3000"></p-growl>
     </div>
   </div>
 </div>

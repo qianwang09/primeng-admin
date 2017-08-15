@@ -15,16 +15,16 @@ import {TOWCodeMappingService} from './service/TOWCodeMappingService'
 
 @NgModule({
   declarations: [
-    AppComponent        
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,
-    InputTextModule, 
-    DataTableModule, 
-    ButtonModule, 
+    InputTextModule,
+    DataTableModule,
+    ButtonModule,
     DialogModule,
     TooltipModule,
     ConfirmDialogModule,

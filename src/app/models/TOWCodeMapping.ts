@@ -1,7 +1,7 @@
 import {SECChangeType} from './SECChangeType'
 export class TOWCodeMapping {
   constructor(LoS: string = '', LoSDescription: string = '', ProductCode: string = '', ProductDescription: string = '',
-  SECChangeTypeCode: number = 0,  SECChangeTypeValue: string = 'N') {
+  SECChangeTypeCode: number = 1,  SECChangeTypeValue: string = 'N') {
     this.TOWCodeMappingID = 0;
     this.LoS = LoS;
     this.LoSDescription = LoSDescription;

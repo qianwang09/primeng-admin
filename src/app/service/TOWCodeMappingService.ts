@@ -18,7 +18,8 @@ export class TOWCodeMappingService {
         LoS: searchLoS,
         productCode: searchProductCode,
         pageIndex: pageIndex,
-        pageSize: pageSize
+        pageSize: pageSize,
+        hash: new Date()
       }
     }).toPromise().then((res): ResponseResult => {
       let result: ResponseResult;
@@ -53,7 +54,19 @@ export class TOWCodeMappingService {
       })
       .catch(this.handleError);
   }
-
+  getProposedTOWCodeMapping(productCode: string): Promise<ResponseResult> {
+    return this.http.get(
+      'GetProposedTOWCodeMapping', { params: {
+        productCode: productCode
+      }}
+    ).toPromise().then((res): ResponseResult => {
+        let result: ResponseResult;
+        if (res.status === 200) {
+          result = <ResponseResult>res.json();
+        }
+        return result;
+      }).catch(this.handleError);
+  }
   saveTOWCodeMapping(mapping: TOWCodeMapping): Promise<string> {
     return this.http.post(
       '/vRiskwebsite/admin/SaveTOWCodeMapping', mapping

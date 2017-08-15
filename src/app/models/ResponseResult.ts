@@ -1,8 +1,8 @@
 export class ResponseResult {
-  constructor() {   
+  constructor() {
   }
   code: number;
   status: string;
-  result: any;  
+  result: any;
   message: string;
 }
